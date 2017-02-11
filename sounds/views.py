@@ -29,8 +29,9 @@ class DiscoverView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(DiscoverView, self).get_context_data(**kwargs)
         context['track'] = Track.objects.order_by('?').first()
-        context['track'].play_count = F('play_count') + 1
-        context['track'].save()
+        if context['track']:
+            context['track'].play_count = F('play_count') + 1
+            context['track'].save()
         return context
 
 

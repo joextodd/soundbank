@@ -6,7 +6,7 @@ var image = false;
 /*
 * Send request to django to sign request.
 */
-function getSignedRequest(file, elemId) {
+function getSignedRequest(file, compressed, elemId) {
     var xhr = new XMLHttpRequest();
     var title = document.getElementById('id_title').value;
     xhr.open("GET", "/sign?filename=" + file.name + "&filetype=" + file.type + '&title=' + title);
@@ -14,7 +14,7 @@ function getSignedRequest(file, elemId) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
-                uploadFile(file, response.signed, response.url, elemId);
+                uploadFile(file, compressed, response.signed, response.url, elemId);
             } else {
                 alert("Could not get signed URL.");
             }
@@ -27,7 +27,7 @@ function getSignedRequest(file, elemId) {
 * Upload file to S3 with pre signed request, and set hidden
 * field value for django model.
 */
-function uploadFile(file, signedUrl, url, elemId) {
+function uploadFile(file, compressed, signedUrl, url, elemId) {
     var xhr = new XMLHttpRequest();
     xhr.open("PUT", signedUrl);
     xhr.setRequestHeader('Content-Type', file.type);
@@ -55,7 +55,27 @@ function uploadFile(file, signedUrl, url, elemId) {
             }
         }
     };
-    xhr.send(file);
+    xhr.send(compressed);
+}
+
+function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type:mimeString});
 }
 
 /*
@@ -65,12 +85,18 @@ function imageSelected() {
     var elemId = 'image';
     document.getElementById(elemId).onchange = function () {
         var file = document.getElementById(elemId).files[0];
-        var cvs = document.createElement('canvas');
-        if (!file) {
+        var reader  = new FileReader();
+
+        reader.addEventListener("load", function () {
+            getSignedRequest(dataURItoBlob(compressImage(reader.result)), elemId);
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+            image = true;
+        } else {
             return alert("No file selected.");
         }
-        getSignedRequest(file, elemId);
-        image = true;
     };
 }
 
@@ -85,6 +111,22 @@ function trackSelected() {
         track = true;
     };
 }
+
+/*
+ * Before uploading an image we crudely compress it using
+ * a canvas element toDataURL quality option
+ */
+const compressImage = url => {
+    const size = url.length;
+    const rate = (-0.0000005 * size) + 0.9;
+    const cvs = document.createElement('canvas');
+    var img = new Image();
+    img.src = url;
+    cvs.width = img.naturalWidth;
+    cvs.height = img.naturalHeight;
+    cvs.getContext("2d").drawImage(img, 0, 0);
+    return cvs.toDataURL('image/jpeg', rate);
+};
 
 /*
 * Disable submit button until image/track have been uploaded.
