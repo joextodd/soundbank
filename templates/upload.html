@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}soundbank | upload{% endblock %}
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container flex flex-center flex-column flex-justify">
+    <div class="form-box">
+
+        <header>
+            <h1>Upload Track</h1>
+        </header>
+
+        {% if form.errors %}
+            <p style="color: red;">
+                Please correct the error{{ form.errors|pluralize }} below.
+            </p>
+        {% endif %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <div class="form-input">
+                <label for="id_title">Title</label>
+                <input id="id_title" name="title" type="text" required
+                       {% if form.title.value %} value="{{ form.title.value }}" {% endif %} />
+                {% if form.title.errors %}
+                    <div class="errors">{{ form.title.errors|striptags }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-input">
+                <label for="id_genre">Genre</label>
+                <select id="id_genre" name="genre">
+                    {% for value, text in form.fields.genre.choices %}
+                        <option value="{{ value }}">{{ text }}</option>
+                    {% endfor %}
+                </select>
+                {% if form.genre.errors %}
+                    <div class="errors">{{ form.genre.errors|striptags }}</div>
+                {% endif %}
+            </div>
+
+            <div class="upload">
+                <div class="form-input-file left">
+                    <div class="btn input-btn">
+                        <span>Image</span>
+                        <input id="image" type="file" accept="image/*" required />
+                    </div>
+                    {% if form.image.errors %}
+                        <div class="errors">{{ form.image.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-input-file right" style="margin-right: 0">
+                    <div class="btn input-btn">
+                        <span>Track</span>
+                        <input id="track" type="file" accept="audio/*" required />
+                    </div>
+                    {% if form.track.errors %}
+                        <div class="errors">{{ form.track.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div id="loading">
+                <img src="{% static 'img/loading.gif' %}" />
+            </div>
+
+            <!-- JS writes S3 image/track URL to hidden field for Django model -->
+            <input id="id_image" name="image" hidden />
+            <input id="id_track" name="track" hidden />
+
+            <div class="upload-form-end">
+                <button id="submit" class="btn" type="submit">Upload</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<script src="{% static 'js/signS3.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+
+  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+
+  {% block head %}{% endblock %}
+</head>
+
+<a href="/discover" class="home">soundbank</a>
+
+<body {% if track.image %}
+	style="background-image: url({{ track.image }}); position: fixed; background-color: black;"
+{% endif %}>
+
+	<nav>
+		<a href="#" class="menu">MENU</a>
+		<a href="/discover" class="links">discover</a>
+		{% if user.is_authenticated %}
+			<a href="/upload" class="links">upload</a>
+			<a href="/account" class="links">account</a>
+			<a href="/logout" class="links">logout</a>
+		{% else %}
+			<a href="/register" class="links">register</a>
+			<a href="/login" class="links">login</a>
+		{% endif %}
+	</nav>
+
+	{% block content %}
+	{% endblock %}
+
+	<script src="{% static 'js/navbar.js' %}"></script>
+
+</body>
+</html>

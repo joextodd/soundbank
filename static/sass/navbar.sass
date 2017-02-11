@@ -1,0 +1,63 @@
+/*
+ * Navbar
+ */
+@import 'colours.sass'
+
+$height: 80px
+
+nav
+	@include navbar()
+	width: 100%
+	text-align: right
+
+	.links
+		height: $height
+
+a
+	margin: 0 calc(1rem + 2vw)
+	text-decoration: none
+	color: white
+	opacity: 0.9
+
+.home
+	@include navbar()
+	font-size: 1.5rem
+	display: inline-block
+	height: $height
+
+	&::first-letter
+		text-decoration: underline
+
+
+// --- OVERLAY MENU ---
+
+@media (min-width: 600px)
+	.menu
+		display: none
+	.links
+		display: inline-block
+
+@media (max-width: 600px)
+	.links
+		display: none
+
+.menu
+	margin-right: 25px
+	cursor: pointer
+
+.menu-open
+	height: 100%
+	width: 100%
+	position: fixed
+	z-index: 1
+	left: 0
+	top: 0
+	background-color: #212121
+	opacity: 0.99
+	overflow-x: hidden
+	transition: 0.5s
+
+.menu-open-links
+	display: block
+	height: $height
+	text-align: center

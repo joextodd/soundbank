@@ -1,0 +1,132 @@
+/*
+ * Forms
+ */
+@import 'colours.sass'
+
+.container
+	top: 100px
+	width: 100%
+	min-height: 100%
+	margin: 0 auto
+
+.form-box
+	background: white
+	max-width: 450px
+	margin: 100px 20px
+	padding: 10px 50px 45px
+	color: $subtext
+	box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 4px 8px rgba(0,0,0,0.23)
+
+	header
+		padding: 15px 0 10px
+		border-bottom: 1px solid #f0ecec
+		color: $subtext
+
+	form
+		padding-top: 1rem
+
+		.form-input
+			margin: 15px 0
+
+		.form-input-file
+			margin: 20px 0
+
+			.btn
+				width: 80px
+
+		label
+			display: inline-block
+			margin-bottom: 5px
+
+		.form-end
+			margin-top: 40px
+			text-align: center
+
+		input
+			width: 100%
+			height: 40px
+			border: 1px solid #ccc
+			line-height: 40px
+			font-size: 1rem
+			box-sizing: border-box
+			color: $text
+
+			&:active
+				border: 2px solid $pink
+
+		input[type=file]
+			border: none
+			opacity: 0
+			position: relative
+			top: -40px
+			cursor: pointer
+
+		select
+			width: 100%
+			height: 40px
+			font-size: 1rem
+			padding: 0 7px
+			-webkit-appearance: none
+			-webkit-border-radius: 0px
+			border: 1px solid #ccc
+			background: url('/static/img/dropdown.png') no-repeat
+			background-color: white
+			background-position: 98% 50%
+			background-size: 13px
+
+
+.upload
+	height: 80px
+	border-bottom: 1px solid #eee
+
+.upload-form-end
+	margin-top: 20px
+	text-align: center
+
+
+.btn
+	width: 100px
+	height: 40px
+	border: none
+	border-radius: 2px
+	background: $pink
+	color: white
+	font-size: 0.9rem
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+	cursor: pointer
+
+	&:hover
+		background: $dark-pink
+
+	&:disabled
+		cursor: auto
+		background: #ccc
+
+.input-btn
+	font-size: 1rem
+	text-align: center
+	line-height: 40px
+
+	span
+		text-transform: uppercase
+
+
+
+#loading
+	height: 100%
+	width: 100%
+	position: fixed
+	z-index: 1
+	left: 0
+	top: 0
+	opacity: 0.95
+	overflow-x: hidden
+	transition: 0.5s
+	background-color: black
+	display: flex
+	justify-content: center
+	align-items: center
+	display: none
+
+	img
+		opacity: 0.95

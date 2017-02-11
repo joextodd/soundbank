@@ -1,0 +1,31 @@
+/*
+ * Mixins
+ */
+
+.flex
+    display: flex
+
+.flex-center
+    align-items: center
+
+.flex-column
+    flex-direction: column
+
+.flex-justify
+    justify-content: center
+
+.left
+    float: left
+
+.right
+    float: right
+
+@mixin center
+    display: flex
+    justify-content: center
+    align-items: center
+
+@mixin navbar
+    height: 80px
+    line-height: 80px
+    position: absolute

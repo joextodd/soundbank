@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}soundbank | account{% endblock %}
+
+{% block content %}
+
+<div class="container flex flex-center flex-column flex-justify">
+    <div class="form-box">
+
+        <header>
+            <h1>Track List</h1>
+        </header>
+
+        {% for track in track_list %}
+            <div class="track">
+                <span class="left">{{ track.title }}</span>
+                <img src="{% static 'img/delete.ico' %}" height="30" width="30"
+                     onclick="deleteTrack({{ track.pk }})" class="right" />
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+<script src="{% static 'js/account.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{
+  "name": "soundbank",
+  "version": "1.0.0",
+  "description": "An utterly fantastic project starter template for Django 1.9.",
+  "main": "index.js",
+  "scripts": {
+  	"build": "sass static/sass/styles.sass:static/styles.css",
+    "watch": "sass --watch static/sass/styles.sass:static/styles.css"
+  },
+  "author": "",
+  "license": "ISC"
+}

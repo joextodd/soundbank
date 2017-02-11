@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}soundbank | register{% endblock %}
+
+{% block content %}
+
+<div class="container flex flex-center flex-column flex-justify">
+    <div class="form-box">
+
+        {% if form.errors %}
+            <p style="color: red;">
+                Please correct the error{{ form.errors|pluralize }} below.
+            </p>
+        {% endif %}
+
+        <header>
+            <h1>Register Artist</h1>
+        </header>
+
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <div class="form-input">
+                <label for="id_username">Username</label>
+                <input id="id_username" name="username" type="text"
+                       {% if form.username.value %} value="{{ form.username.value }}" {% endif %} />
+                {% if form.username.errors %}
+                    <div class="errors">{{ form.username.errors|striptags }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-input">
+                <label for="id_email">Email</label>
+                <input id="id_email" name="email" type="email"
+                       {% if form.email.value %} value="{{ form.email.value }}" {% endif %} />
+                {% if form.email.errors %}
+                    <div class="errors">{{ form.email.errors|striptags }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-input">
+                <label for="id_password">Password</label>
+                <input id="id_password" name="password" type="password"
+                       {% if form.password.value %} value="{{ form.password.value }}" {% endif %} />
+                {% if form.password.errors %}
+                    <div class="errors">{{ form.password.errors|striptags }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-input">
+                <label for="id_password2">Confirm Password</label>
+                <input id="id_password2" name="password2" type="password"
+                       {% if form.password2.value %} value="{{ form.password2.value }}" {% endif %} />
+                {% if form.password2.errors %}
+                    <div class="errors">{{ form.password2.errors|striptags }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-end">
+                <button type="submit" class="btn">Register</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
