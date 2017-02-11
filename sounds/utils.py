@@ -18,7 +18,8 @@ def s3_sign_request(key, filetype):
         Params={
             'Bucket': settings.AWS_S3_BUCKET_NAME,
             'Key': key,
-            'ContentType': filetype
+            'ContentType': filetype,
+            'CacheControl': 'max-age=1296000'
         },
         ExpiresIn=300,
         HttpMethod='PUT'

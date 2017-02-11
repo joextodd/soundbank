@@ -6,7 +6,7 @@ var image = false;
 /*
 * Send request to django to sign request.
 */
-function getSignedRequest(file, compressed, elemId) {
+function getSignedRequest(file, elemId) {
     var xhr = new XMLHttpRequest();
     var title = document.getElementById('id_title').value;
     xhr.open("GET", "/sign?filename=" + file.name + "&filetype=" + file.type + '&title=' + title);
@@ -14,7 +14,7 @@ function getSignedRequest(file, compressed, elemId) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
-                uploadFile(file, compressed, response.signed, response.url, elemId);
+                uploadFile(file, response.signed, response.url, elemId);
             } else {
                 alert("Could not get signed URL.");
             }
@@ -27,7 +27,7 @@ function getSignedRequest(file, compressed, elemId) {
 * Upload file to S3 with pre signed request, and set hidden
 * field value for django model.
 */
-function uploadFile(file, compressed, signedUrl, url, elemId) {
+function uploadFile(file, signedUrl, url, elemId) {
     var xhr = new XMLHttpRequest();
     xhr.open("PUT", signedUrl);
     xhr.setRequestHeader('Content-Type', file.type);
@@ -55,7 +55,7 @@ function uploadFile(file, compressed, signedUrl, url, elemId) {
             }
         }
     };
-    xhr.send(compressed);
+    xhr.send(file.compressed ? file.compressed : file);
 }
 
 function dataURItoBlob(dataURI) {
@@ -88,7 +88,8 @@ function imageSelected() {
         var reader  = new FileReader();
 
         reader.addEventListener("load", function () {
-            getSignedRequest(dataURItoBlob(compressImage(reader.result)), elemId);
+            file.compressed = dataURItoBlob(compressImage(reader.result));
+            getSignedRequest(file, elemId);
         }, false);
 
         if (file) {
