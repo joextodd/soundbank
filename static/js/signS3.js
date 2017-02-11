@@ -4,22 +4,6 @@ var track = false;
 var image = false;
 
 /*
-* Attach event to sign s3 request when file is added.
-*/
-function fileSelected(elemId) {
-    document.getElementById(elemId).onchange = function () {
-        var file = document.getElementById(elemId).files[0];
-        if (!file) {
-            return alert("No file selected.");
-        }
-        getSignedRequest(file, elemId);
-
-        if (elemId === 'image') image = true;
-        if (elemId === 'track') track = true;
-    };
-}
-
-/*
 * Send request to django to sign request.
 */
 function getSignedRequest(file, elemId) {
@@ -47,6 +31,7 @@ function uploadFile(file, signedUrl, url, elemId) {
     var xhr = new XMLHttpRequest();
     xhr.open("PUT", signedUrl);
     xhr.setRequestHeader('Content-Type', file.type);
+    xhr.setRequestHeader('Cache-Control', 'max-age=1296000');
 
     if (image && track) {
         showLoading(true);
@@ -71,6 +56,34 @@ function uploadFile(file, signedUrl, url, elemId) {
         }
     };
     xhr.send(file);
+}
+
+/*
+* Attach event to sign s3 request when file is added.
+*/
+function imageSelected() {
+    var elemId = 'image';
+    document.getElementById(elemId).onchange = function () {
+        var file = document.getElementById(elemId).files[0];
+        var cvs = document.createElement('canvas');
+        if (!file) {
+            return alert("No file selected.");
+        }
+        getSignedRequest(file, elemId);
+        image = true;
+    };
+}
+
+function trackSelected() {
+    var elemId = 'track';
+    document.getElementById(elemId).onchange = function () {
+        var file = document.getElementById(elemId).files[0];
+        if (!file) {
+            return alert("No file selected.");
+        }
+        getSignedRequest(file, elemId);
+        track = true;
+    };
 }
 
 /*
@@ -100,6 +113,6 @@ function showLoading(state) {
 
 }
 
-fileSelected('image');
-fileSelected('track');
+imageSelected();
+trackSelected();
 submitEnable(false);
