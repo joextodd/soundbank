@@ -3,15 +3,20 @@
 SoundBank - sources random uploaded tracks to the user.
 
 @help:
-    Start postgres server:
-        --> postgres -D /usr/local/var/postgres
+	Start postgres server:
+		--> postgres -D /usr/local/var/postgres
 """
 import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "soundbank.settings")
 
-    from django.core.management import execute_from_command_line
+	settings = os.environ.get('DJANGO_SETTINGS_MODULE')
 
-    execute_from_command_line(sys.argv)
+	if not settings:
+		# Use development settings by default
+		os.environ['DJANGO_SETTINGS_MODULE'] = 'soundbank.settings.dev'
+
+	from django.core.management import execute_from_command_line
+
+	execute_from_command_line(sys.argv)

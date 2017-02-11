@@ -1,21 +1,23 @@
-# Heroku Django Project - soundbank
+# Heroku Django Project - SoundBank
 
-## Features
+## Requirements
 
-- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
-- Enhancements to Django's static file serving functionality via WhiteNoise
+1. Python3 virtualenv
+2. node.js installed
+3. SASS installed
 
 ## How to Use
 
 To use this project, follow these steps:
 
-1. Create your working environment.
-2. Install requirements (`$ pip install -r requirements.txt`)
-3. Run locally with `heroku local`
+1. Create your working environment (Python3)
+2. Install requirements `pip3 install -r requirements.txt`
+3. Collect static files `python3 manage.py collectstatic`
+4. Run local server with `python manage.py runserver`
 
 ## Compile SASS
 
-    $ sass --watch static/styles.scss:static/styles.css
+	`npm build` or `npm run watch`
 
 ## Further Reading
 

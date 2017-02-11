@@ -1,5 +1,5 @@
 """
-settings.py
+base.py
 
 Django settings for SoundBank project.
 """
@@ -8,10 +8,7 @@ import sys
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "gn=9v$!2e$%oqp$-k)8^@3&bw1eu!7xdxb&me#@7yo1o9*8pk)"
@@ -29,7 +26,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'compressor',
     'sounds',
 ]
 
@@ -51,7 +47,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates')
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'static')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -128,13 +125,7 @@ LOGIN_REDIRECT_URL = "/upload/"
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 )
-COMPRESS_PRECOMPILERS = (
-    ('text/sass', 'sass {infile} {outfile}'),
-)
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
 
 if DEBUG:
     LOGGING = {

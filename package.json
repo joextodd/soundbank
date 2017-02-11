@@ -4,8 +4,8 @@
   "description": "An utterly fantastic project starter template for Django 1.9.",
   "main": "index.js",
   "scripts": {
-  	"build": "sass static/sass/styles.sass:static/styles.css",
-    "watch": "sass --watch static/sass/styles.sass:static/styles.css"
+    "build": "sass -t compressed static/sass/styles.sass:static/styles.css --style compressed",
+    "watch": "sass --watch static/sass/styles.sass:static/styles.css --style compressed"
   },
   "author": "",
   "license": "ISC"

@@ -7,6 +7,7 @@ import os
 import urllib
 
 from django.views import View
+from django.db.models import F
 from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import redirect
@@ -28,6 +29,8 @@ class DiscoverView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(DiscoverView, self).get_context_data(**kwargs)
         context['track'] = Track.objects.order_by('?').first()
+        context['track'].play_count = F('play_count') + 1
+        context['track'].save()
         return context
 
 

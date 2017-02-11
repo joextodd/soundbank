@@ -3,7 +3,6 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import s3direct.fields
 
 
 class Migration(migrations.Migration):
@@ -15,19 +14,12 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='track',
-            name='genre',
-            field=models.CharField(blank=True, choices=[('Blues', 'Blues'), ('Classical', 'Classical'), ('Country', 'Country'), ('Electronic', 'Electronic'), ('Folk', 'Folk'), ('Jazz', 'Jazz'), ('Punk', 'Punk'), ('Reggae', 'Reggae'), ('Rock', 'Rock')], max_length=32, null=True),
-        ),
-        migrations.AddField(
-            model_name='track',
             name='image',
-            field=s3direct.fields.S3DirectField(default='Rock'),
-            preserve_default=False,
+            field=models.CharField(max_length=256, default=''),
         ),
         migrations.AddField(
             model_name='track',
             name='track',
-            field=s3direct.fields.S3DirectField(default='Rock'),
-            preserve_default=False,
+            field=models.CharField(max_length=256, default=''),
         ),
     ]

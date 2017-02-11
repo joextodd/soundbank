@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import s3direct.fields
 
 
 class Migration(migrations.Migration):
@@ -31,12 +30,13 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=256)),
-                ('track', s3direct.fields.S3DirectField()),
-                ('image', s3direct.fields.S3DirectField()),
+                ('track', models.CharField(max_length=256)),
+                ('image', models.CharField(max_length=256)),
                 ('length', models.DurationField(blank=True, editable=False, null=True)),
                 ('release_date', models.DateField(blank=True, null=True)),
                 ('published_date', models.DateField(auto_now=True)),
                 ('artist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sounds.Artist')),
+                ('genre', models.CharField(blank=True, choices=[('Blues', 'Blues'), ('Classical', 'Classical'), ('Country', 'Country'), ('Electronic', 'Electronic'), ('Folk', 'Folk'), ('Jazz', 'Jazz'), ('Punk', 'Punk'), ('Reggae', 'Reggae'), ('Rock', 'Rock')], max_length=32, null=True)),
             ],
         ),
     ]

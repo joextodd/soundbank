@@ -39,10 +39,8 @@ class Track(models.Model):
     genre = models.CharField(max_length=32, choices=GENRE_CHOICES, blank=True, null=True)  # optional
     track = models.CharField(max_length=256)
     image = models.CharField(max_length=256)
-    length = models.DurationField(editable=False, blank=True, null=True)  # optional
-    release_date = models.DateField(blank=True, null=True)  # optional
     published_date = models.DateField(auto_now=True)
-    #metadata = models.CharField()
+    play_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

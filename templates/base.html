@@ -1,12 +1,14 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}{% endblock %}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}{% endblock %}</title>
 
-  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+	<style>
+		{% include 'styles.css' %}
+	</style>
 
-  {% block head %}{% endblock %}
+	{% block head %}{% endblock %}
 </head>
 
 <a href="/discover" class="home">soundbank</a>
@@ -31,7 +33,7 @@
 	{% block content %}
 	{% endblock %}
 
-	<script src="{% static 'js/navbar.js' %}"></script>
+	<script src="{% static 'js/navbar.js' %}" defer></script>
 
 </body>
 </html>
