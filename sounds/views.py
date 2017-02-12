@@ -74,29 +74,24 @@ class SignedS3Request(View):
     Pre sign a request to directly upload to S3.
     Note: Heroku places a timeout on file uploads, so we need
     to go direct.
-
-    If a title hasn't been entered yet, we'll generate a random
-    string and use that for storage.
     """
     def get(self, request):
         filename, extension = os.path.splitext(request.GET.get('filename'))
         filetype = request.GET.get('filetype')
-        title = request.GET.get('title')
-        if title.strip() == '':
-            title = get_random_string(length=8)
+        guid = get_random_string(length=16)
 
         if 'image' in filetype:
-            name = 'image'
+            name = 'images'
         else:
-            name = 'track'
+            name = 'tracks'
 
-        key = 'media/{user}/{title}/{name}{ext}'.format(user=self.request.user,
-            title=title, name=name, ext=extension
+        key = 'media/{user}/{name}/{guid}.{ext}'.format(user=self.request.user,
+            name=name, guid=guid, ext=extension
         )
         signed = s3_sign_request(key, filetype)
-        url = 'https://s3-eu-west-1.amazonaws.com/{bucket}/media/{user}/{title}/{name}{ext}'.format(
+        url = 'https://s3-eu-west-1.amazonaws.com/{bucket}/media/{user}/{name}/{guid}.{ext}'.format(
             bucket=settings.AWS_S3_BUCKET_NAME, user=self.request.user,
-            title=title, name=name, ext=extension
+            name=name, guid=guid, ext=extension
         )
 
         return JsonResponse({'signed': signed, 'url': url})

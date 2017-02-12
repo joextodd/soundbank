@@ -8,8 +8,7 @@ var image = false;
 */
 function getSignedRequest(file, elemId) {
     var xhr = new XMLHttpRequest();
-    var title = document.getElementById('id_title').value;
-    xhr.open("GET", "/sign?filename=" + file.name + "&filetype=" + file.type + '&title=' + title);
+    xhr.open("GET", "/sign?filename=" + file.name + "&filetype=" + file.type);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
