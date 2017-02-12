@@ -11,17 +11,6 @@ from django.dispatch import receiver
 import sounds.utils as utils
 
 
-class Artist(models.Model):
-    name = models.CharField(max_length=128)
-    site = models.URLField()
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ['name']
-
-
 class Track(models.Model):
     GENRE_CHOICES = (
         ('Blues', 'Blues',),

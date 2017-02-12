@@ -8,8 +8,6 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-from sounds.models import Artist
-
 
 class RegisterForm(UserCreationForm):
     """
@@ -20,11 +18,10 @@ class RegisterForm(UserCreationForm):
     :return: newly created or invalid user
     """
     email = forms.EmailField(required=True)
-    site = forms.URLField(required=False)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2', 'site']
+        fields = ['username', 'email', 'password1', 'password2']
 
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
@@ -34,8 +31,5 @@ class RegisterForm(UserCreationForm):
 
         if commit:
             user.save()
-            artist = Artist.objects.create(name=self.cleaned_data['username'],
-                                           site=self.cleaned_data['site'])
-            artist.save()
 
         return user

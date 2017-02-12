@@ -39,11 +39,11 @@
             </div>
 
             <div class="form-input">
-                <label for="id_password">Password</label>
-                <input id="id_password" name="password" type="password"
-                       {% if form.password.value %} value="{{ form.password.value }}" {% endif %} />
-                {% if form.password.errors %}
-                    <div class="errors">{{ form.password.errors|striptags }}</div>
+                <label for="id_password1">Password</label>
+                <input id="id_password1" name="password1" type="password"
+                       {% if form.password1.value %} value="{{ form.password1.value }}" {% endif %} />
+                {% if form.password1.errors %}
+                    <div class="errors">{{ form.password1.errors|striptags }}</div>
                 {% endif %}
             </div>
 
