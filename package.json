@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "pip3 install -r requirements.txt",
-    "start": "python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver",
+    "start": "python3 manage.py collectstatic --noinput && python3 manage.py migrate && python3 manage.py runserver",
     "build": "node-sass static/sass/styles.sass > static/styles.css --output-style compressed",
     "watch": "node-sass --watch static/sass/styles.sass > static/styles.css --output-style compressed"
   },

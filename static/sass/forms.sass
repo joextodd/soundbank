@@ -11,28 +11,24 @@
 
 .form-box
 	background: white
-	max-width: 450px
-	margin: 100px 20px
-	padding: 10px 50px 45px
+	max-width: 20rem
+	margin: 8rem 1rem 3rem
+	padding: 2rem
 	color: $subtext
 	box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 4px 8px rgba(0,0,0,0.23)
 
 	header
-		padding: 15px 0 10px
 		border-bottom: 1px solid #f0ecec
 		color: $subtext
 
 	form
-		padding-top: 1rem
+		width: 18rem
 
 		.form-input
 			margin: 15px 0
 
 		.form-input-file
 			margin: 20px 0
-
-			.btn
-				width: 80px
 
 		label
 			display: inline-block
@@ -41,25 +37,20 @@
 		.form-end
 			margin-top: 40px
 			text-align: center
+			button
+			  width: 100%
+			  padding: 1.5rem 1rem
 
-		input
+		input:not([type="file"])
 			width: 100%
+			padding: 1.5rem 1rem
+			outline: none
 			height: 40px
 			border: 1px solid #ccc
 			line-height: 40px
 			font-size: 1rem
 			box-sizing: border-box
 			color: $text
-
-			&:active
-				border: 2px solid $pink
-
-		input[type=file]
-			border: none
-			opacity: 0
-			position: relative
-			top: -40px
-			cursor: pointer
 
 		select
 			width: 100%
@@ -76,22 +67,23 @@
 
 
 .upload
-	height: 80px
 	border-bottom: 1px solid #eee
 
 .upload-form-end
 	margin-top: 20px
 	text-align: center
+	button
+	  width: 100%
+	  padding: 1.5rem 1rem
 
 
 .btn
-	width: 100px
-	height: 40px
+	width: 100%
 	border: none
 	border-radius: 2px
 	background: $pink
 	color: white
-	font-size: 0.9rem
+	font-size: 1rem
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
 	cursor: pointer
 
@@ -103,14 +95,22 @@
 		background: #ccc
 
 .input-btn
+	position: relative
 	font-size: 1rem
-	text-align: center
-	line-height: 40px
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 1rem 0
 
-	span
-		text-transform: uppercase
-
-
+	input
+		position: absolute
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+		width: 100%
+		height: auto
+		opacity: 0
 
 #loading
 	height: 100%

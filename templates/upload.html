@@ -46,9 +46,9 @@
             </div>
 
             <div class="upload">
-                <div class="form-input-file left">
+                <div class="form-input-file">
                     <div class="btn input-btn">
-                        <span>Image</span>
+                        <span>Cover Image</span>
                         <input id="image" type="file" accept="image/*" required />
                     </div>
                     {% if form.image.errors %}
@@ -56,9 +56,9 @@
                     {% endif %}
                 </div>
 
-                <div class="form-input-file right" style="margin-right: 0">
+                <div class="form-input-file">
                     <div class="btn input-btn">
-                        <span>Track</span>
+                        <span>Audio Track</span>
                         <input id="track" type="file" accept="audio/*" required />
                     </div>
                     {% if form.track.errors %}

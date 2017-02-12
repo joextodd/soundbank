@@ -9,6 +9,11 @@
 @import 'forms.sass'
 @import 'navbar.sass'
 
+*
+*::after,
+*::before
+    box-sizing: border-box
+
 html, body
     margin: 0
     width: 100%
@@ -17,6 +22,9 @@ html, body
     background-color: $pink
     background-size: cover
     position: relative
+
+body
+    font-size: calc(10px + 1vmin)
 
 a
     text-decoration: none

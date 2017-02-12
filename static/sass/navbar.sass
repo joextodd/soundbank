@@ -3,18 +3,19 @@
  */
 @import 'colours.sass'
 
-$height: 80px
+$height: 4rem
 
 nav
 	@include navbar()
 	width: 100%
 	text-align: right
+	background: rgba(0,0,0,.1)
 
 	.links
 		height: $height
 
 a
-	margin: 0 calc(1rem + 2vw)
+	margin: 0 1rem
 	text-decoration: none
 	color: white
 	opacity: 0.9
