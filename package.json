@@ -6,12 +6,16 @@
   "scripts": {
     "preinstall": "pip3 install -r requirements.txt",
     "start": "python3 manage.py collectstatic --noinput && python3 manage.py migrate && python3 manage.py runserver",
-    "build": "node-sass static/sass/styles.sass > static/styles.css --output-style compressed",
+    "build": "babel static/js -d static/out && node-sass static/sass/styles.sass > static/styles.css --output-style compressed",
     "watch": "node-sass --watch static/sass/styles.sass > static/styles.css"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "node-sass": "^4.5.0"
+    "babel-cli": "^6.22.2",
+    "babel-preset-es2015": "^6.22.0",
+    "install": "^0.8.7",
+    "node-sass": "^4.5.0",
+    "npm": "^4.2.0"
   }
 }

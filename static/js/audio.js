@@ -1,6 +1,6 @@
 /*
  * Go to next song when finished.
  */
-document.getElementsByTagName('audio')[0].onended = () => {
+document.querySelector('audio').onended = () => {
 	window.location.href = '/discover';
 };

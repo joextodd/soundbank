@@ -1,21 +1,23 @@
+'use strict';
+
 /*
  * Detect a swipe, and handle response.
  */
-let touchstartX = 0;
-let touchstartY = 0;
-let touchendX = 0;
-let touchendY = 0;
+var touchstartX = 0;
+var touchstartY = 0;
+var touchendX = 0;
+var touchendY = 0;
 
-const swipeThreshold = 150;
-const body = document.querySelector('body');
-const audio = document.querySelector('audio');
+var swipeThreshold = 150;
+var body = document.getElementsByTagName('body')[0];
+var audio = document.getElementsByTagName('audio')[0];
 
-body.addEventListener('touchstart', (event) => {
+body.addEventListener('touchstart', function (event) {
     touchstartX = event.pageX;
     touchstartY = event.pageY;
 }, false);
 
-body.addEventListener('touchend', (event) => {
+body.addEventListener('touchend', function (event) {
     touchendX = event.pageX;
     touchendY = event.pageY;
     handleGesture();
@@ -25,11 +27,11 @@ body.addEventListener('touchend', (event) => {
  * Swipe to new song on a full swipe, otherwise force
  * play, as this is restricted on mobile devices.
  */
-const handleGesture = () => {
+var handleGesture = function handleGesture() {
     if (Math.abs(touchendX - touchstartX) > swipeThreshold) {
         document.location.href = '/discover';
         audio.play();
     } else {
-    	audio.play();
+        audio.play();
     }
-}
+};

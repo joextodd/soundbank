@@ -1,9 +1,11 @@
+"use strict";
+
 /*
  * Account page, send requests to delete tracks then reload.
  */
-const deleteTrack = (pk) => {
-	const xhr = new XMLHttpRequest();
-	xhr.open("GET", "/delete/" + pk);
+var deleteTrack = function deleteTrack(pk) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/delete/" + pk);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
@@ -14,4 +16,4 @@ const deleteTrack = (pk) => {
         }
     };
     xhr.send();
-}
+};

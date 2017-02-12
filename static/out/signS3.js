@@ -1,11 +1,14 @@
-let track = false;
-let image = false;
+"use strict";
+'use-strict';
+
+var track = false;
+var image = false;
 
 /*
 * Send request to django to sign request.
 */
 function getSignedRequest(file, elemId) {
-    const xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open("GET", "/sign?filename=" + file.name + "&filetype=" + file.type);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -25,7 +28,7 @@ function getSignedRequest(file, elemId) {
 * field value for django model.
 */
 function uploadFile(file, signedUrl, url, elemId) {
-    const xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open("PUT", signedUrl);
     xhr.setRequestHeader('Content-Type', file.type);
     xhr.setRequestHeader('Cache-Control', 'max-age=1296000');
@@ -40,8 +43,7 @@ function uploadFile(file, signedUrl, url, elemId) {
             if (xhr.status === 200 || xhr.status === 204) {
                 document.getElementById('id_' + elemId).value = url;
 
-                if (document.getElementById('id_image').value !== '' &&
-                    document.getElementById('id_track').value !== '') {
+                if (document.getElementById('id_image').value !== '' && document.getElementById('id_track').value !== '') {
                     submitEnable(true);
                     showLoading(false);
                     submitLoading(false);
@@ -58,10 +60,7 @@ function uploadFile(file, signedUrl, url, elemId) {
 function dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string
     var byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(dataURI.split(',')[1]);
-    else
-        byteString = unescape(dataURI.split(',')[1]);
+    if (dataURI.split(',')[0].indexOf('base64') >= 0) byteString = atob(dataURI.split(',')[1]);else byteString = unescape(dataURI.split(',')[1]);
 
     // separate out the mime component
     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -72,17 +71,17 @@ function dataURItoBlob(dataURI) {
         ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], {type:mimeString});
+    return new Blob([ia], { type: mimeString });
 }
 
 /*
 * Attach event to sign s3 request when file is added.
 */
 function imageSelected() {
-    const elemId = 'image';
+    var elemId = 'image';
     document.getElementById(elemId).onchange = function () {
-        const file = document.getElementById(elemId).files[0];
-        const reader  = new FileReader();
+        var file = document.getElementById(elemId).files[0];
+        var reader = new FileReader();
 
         reader.addEventListener("load", function () {
             file.compressed = dataURItoBlob(compressImage(reader.result));
@@ -99,7 +98,7 @@ function imageSelected() {
 }
 
 function trackSelected() {
-    const elemId = 'track';
+    var elemId = 'track';
     document.getElementById(elemId).onchange = function () {
         var file = document.getElementById(elemId).files[0];
         if (!file) {
@@ -114,10 +113,10 @@ function trackSelected() {
  * Before uploading an image we crudely compress it using
  * a canvas element toDataURL quality option
  */
-const compressImage = url => {
-    const size = url.length;
-    const rate = (-0.0000005 * size) + 0.9;
-    const cvs = document.createElement('canvas');
+var compressImage = function compressImage(url) {
+    var size = url.length;
+    var rate = -0.0000005 * size + 0.9;
+    var cvs = document.createElement('canvas');
     var img = new Image();
     img.src = url;
     cvs.width = img.naturalWidth;
@@ -150,7 +149,6 @@ function showLoading(state) {
     } else {
         document.getElementById('loading').style.display = 'none';
     }
-
 }
 
 imageSelected();
