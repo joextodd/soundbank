@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'sounds',
+    'pwa',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -137,3 +138,23 @@ if DEBUG:
             },
         }
     }
+
+# Web app manifest
+PWA_APP_NAME = 'soundbank'
+PWA_APP_DESCRIPTION = 'Discover songs by anonymous artists'
+PWA_APP_THEME_COLOR = '#E91E63'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/img/icon-64.png',
+        'sizes': '64x64'
+    },
+    {
+        'src': '/static/img/icon-128.png',
+        'sizes': '128x128'
+    },
+    {
+        'src': '/static/img/icon-192.png',
+        'sizes': '192x192'
+    }
+]
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js', 'serviceworker.js')

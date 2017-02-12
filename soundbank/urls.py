@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^login/', login, {'template_name': 'login.html'}),
     url(r'^logout/', logout, {'next_page': '/discover'}),
     url(r'^admin/', admin.site.urls),
+    url('', include('pwa.urls')),
 ]
