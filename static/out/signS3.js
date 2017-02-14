@@ -1,5 +1,4 @@
 "use strict";
-'use-strict';
 
 var track = false;
 var image = false;

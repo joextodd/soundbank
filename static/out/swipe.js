@@ -9,8 +9,8 @@ var touchendX = 0;
 var touchendY = 0;
 
 var swipeThreshold = 150;
-var body = document.getElementsByTagName('body')[0];
-var audio = document.getElementsByTagName('audio')[0];
+var body = document.querySelector('body');
+var audio = document.querySelector('audio');
 
 body.addEventListener('touchstart', function (event) {
     touchstartX = event.pageX;

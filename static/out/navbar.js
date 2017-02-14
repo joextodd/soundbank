@@ -1,14 +1,15 @@
 'use strict';
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 /*
  * Open/close a full screen nav menu.
  */
-'use-strict';
-
 var menuOpen = false;
 var height = 80;
-var nav = document.getElementsByTagName('nav')[0];
-var menu = document.getElementsByClassName('menu')[0];
-var links = [].slice.call(document.getElementsByClassName('links'));
+var nav = document.querySelector('nav');
+var menu = document.querySelector('.menu');
+var links = [].concat(_toConsumableArray(document.querySelectorAll('.links')));
 
 var openMenu = function openMenu() {
   if (!menuOpen) {
